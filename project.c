@@ -1,21 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #define STUDENT_FILE "students.txt"
 #define CREDENTIAL_FILE "credentials.txt"
-
 struct Student {
     int roll;
     char name[50];
     float marks;
 };
-
-// Global variables for logged user:
 char currentUser[20];
 char currentRole[10];
-
-// Function declarations
 int loginSystem();
 void mainMenu();
 void adminMenu();
@@ -25,7 +19,6 @@ void displayStudents();
 void searchStudent();
 void updateStudent();
 void deleteStudent();
-
 int main() {
     if (loginSystem()) {
         mainMenu();
@@ -34,8 +27,6 @@ int main() {
     }
     return 0;
 }
-
-// ========================== LOGIN SYSTEM ==========================
 int loginSystem() {
     char username[20], password[20];
     char fileUser[20], filePass[20], fileRole[10];
@@ -65,7 +56,7 @@ int loginSystem() {
     return 0;
 }
 
-// ========================== MAIN MENU =============================
+
 void mainMenu() {
     if (strcmp(currentRole, "ADMIN") == 0)
         adminMenu();
@@ -73,7 +64,7 @@ void mainMenu() {
         userMenu();
 }
 
-// ========================== ADMIN MENU ============================
+
 void adminMenu() {
     int choice;
     do {
@@ -99,7 +90,7 @@ void adminMenu() {
     } while (1);
 }
 
-// ========================== USER MENU =============================
+
 void userMenu() {
     printf("\n===== USER MENU =====\n");
     printf("1. Display All Students\n");
@@ -116,7 +107,7 @@ void userMenu() {
     }
 }
 
-// ========================== ADD STUDENT ===========================
+
 void addStudent() {
     FILE *fp = fopen(STUDENT_FILE, "a");
     if (!fp) {
@@ -139,7 +130,7 @@ void addStudent() {
     printf("Student added successfully!\n");
 }
 
-// ========================== DISPLAY STUDENTS ======================
+
 void displayStudents() {
     FILE *fp = fopen(STUDENT_FILE, "r");
     if (!fp) {
@@ -158,7 +149,7 @@ void displayStudents() {
     fclose(fp);
 }
 
-// ========================== SEARCH STUDENT ========================
+
 void searchStudent() {
     int r, found = 0;
     struct Student st;
@@ -187,7 +178,7 @@ void searchStudent() {
     fclose(fp);
 }
 
-// ========================== UPDATE STUDENT ========================
+
 void updateStudent() {
     int r, found = 0;
     struct Student st;
@@ -221,7 +212,7 @@ void updateStudent() {
         printf("Record Not Found!\n");
 }
 
-// ========================== DELETE STUDENT ========================
+
 void deleteStudent() {
     int r, found = 0;
     struct Student st;
@@ -250,4 +241,5 @@ void deleteStudent() {
         printf("Record Deleted!\n");
     else
         printf("Record Not Found!\n");
+
 }
